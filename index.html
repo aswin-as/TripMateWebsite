@@ -1,136 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TripMate - How It Works</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TripMate – Travel Like a Local</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9fafb;
-      color: #333;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-    }
-    .step {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
+    .loading {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 4rem;
+      gap: 0.5rem;
     }
-    .step img {
-      max-width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      flex: 1 1 45%;
+
+    .loader {
+      width: 16px;
+      height: 16px;
+      border: 3px solid #ffffff;
+      border-top: 3px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
-    .card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      flex: 1 1 45%;
-    }
-    .card h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-    .card p {
-      color: #555;
-      margin-bottom: 1rem;
-    }
-    .card ul {
-      list-style: none;
-      padding: 0;
-    }
-    .card ul li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-    .card ul li::before {
-      content: '\2713';
-      color: #f97316;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    @media (max-width: 768px) {
-      .step {
-        flex-direction: column;
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>How It Works</h1>
+  <header>
+    <h1>TripMate</h1>
+    <p>One day. One guide. All memories.</p>
+  </header>
 
-    <div class="step">
-      <img src="https://picsum.photos/600/400/?blur=2" alt="Search Your City">
-      <div class="card">
-        <h2>Step 1: Search Your City</h2>
-        <p>Start by entering your destination in India. Explore cities, villages, and local experiences.</p>
-        <ul>
-          <li>100+ destinations</li>
-          <li>Filter by date & duration</li>
-          <li>Discover popular experiences</li>
-        </ul>
-      </div>
-    </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="faq.html">FAQ</a>
+  </nav>
 
-    <div class="step">
-      <img src="https://picsum.photos/200/300/?blur=2" alt="Choose Your Guide">
-      <div class="card">
-        <h2>Step 2: Choose Your Local Guide</h2>
-        <p>Select Guide with Bike or Car, check profiles and ratings.</p>
-        <ul>
-          <li>Verified reviews</li>
-          <li>Filter by specialty & price</li>
-          <li>Auto Assign Guide nearby you</li>
-        </ul>
-      </div>
-    </div>
+  <main>
+    <h2>Travel Like a Local</h2>
+    <ul class="features">
+      <li>Book a local guide with bike or car</li>
+      <li>Explore food, culture & hidden places</li>
+      <li>Affordable dorm & homestay booking</li>
+      <li>Solo or group — safe & easy</li>
+    </ul>
 
-    <div class="step">
-      <img src="https://picsum.photos/200/300/?blur=2" alt="Book & Pay">
-      <div class="card">
-        <h2>Step 3: Guide + Ride</h2>
-        <p>Select your guide, and explore like a Local.</p>
-        <ul>
-          <li>Guilde like a friend</li>
-          <li>Personalized experience</li>
-          <li>Explore the Villages, Rivers, etc..</li>
-          <li>Explore safely with TripMate</li>
-        </ul>
-      </div>
-    </div>
+    <form id="waitlist-form">
+      <label for="name"><strong>Your Name:</strong></label>
+      <input type="text" id="name" name="name" placeholder="Your name" required />
 
-    <div class="step">
-      <img src="https://picsum.photos/200/300/?blur=2" alt="Meet & Explore">
-      <div class="card">
-        <h2>Step 4: Book hostel or dormetory</h2>
-        <p>Don't stay in hotels, Stay in hotels or dormetory for just 300.</p>
-        <ul>
-          <li>In-app chat & location</li>
-          <li>Free Food</li>
-          <li>24/7 support</li>
-        </ul>
-      </div>
-    </div>
+      <label for="phone"><strong>Phone Number:</strong></label>
+      <input type="tel" id="phone" name="phone" placeholder="1234567890" required />
 
-  </div>
+      <button type="submit" id="submit-btn">Join Now</button>
+      <p id="form-response" style="color: green; font-weight: 500; margin-top: 1rem;"></p>
+    </form>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzSioKXWIWRridWfhJtqT6p0NDPIH6ShvaAB5SoKkvB9qIOU2e37K_c8FNeQf4grjzZ/exec";
+      const form = document.getElementById("waitlist-form");
+      const responseMessage = document.getElementById("form-response");
+      const submitBtn = document.getElementById("submit-btn");
+
+      const originalBtnText = submitBtn.innerHTML;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Disable button and show loading animation
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="loading"><span class="loader"></span>Submitting...</span>`;
+
+        const formData = new FormData(form);
+        fetch(scriptURL, { method: "POST", body: formData })
+          .then(() => {
+            responseMessage.style.color = "green";
+            responseMessage.innerText = "🎉 You’ve been added to the waitlist!";
+            form.reset();
+          })
+          .catch((error) => {
+            responseMessage.style.color = "red";
+            responseMessage.innerText = "Something went wrong. Please try again later.";
+            console.error("Error!", error.message);
+          })
+          .finally(() => {
+            // Re-enable button and reset text
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          });
+      });
+    </script>
+  </main>
+
+  <footer>
+    &copy; 2025 TripMate. Made for explorers.
+  </footer>
 </body>
 </html>
